@@ -50,3 +50,10 @@ body {
     height: 100px;
     background-image: linear-gradient(to right, var(--green), var(--blue));
 }
+
+
+
+/*
+run:
+npx tailwindcss -i ./src/css/App.css -o ./src/css/tailwind.css --watch
+*/
