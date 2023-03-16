@@ -1,3 +1,4 @@
+import Navbar from './components/Navbar';
 import './css/tailwind.css';
 // Run: npx tailwindcss -i ./src/css/App.css -o ./src/css/tailwind.css --watch
 // import {  } from 'flowbite-react'
@@ -7,7 +8,9 @@ import './css/tailwind.css';
 function App() {
   return (
     <>
+     <Navbar></Navbar>
     </>
+   
   );
 }
 

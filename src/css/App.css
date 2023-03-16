@@ -41,3 +41,7 @@ a {
 li {
     list-style: none;
 }
+
+body {
+    overflow: hidden;
+}

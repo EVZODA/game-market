@@ -1078,6 +1078,10 @@ input:checked + .toggle-bg {
   pointer-events: none;
 }
 
+.visible {
+  visibility: visible;
+}
+
 .invisible {
   visibility: hidden;
 }
@@ -1097,6 +1101,26 @@ input:checked + .toggle-bg {
 .inset-y-0 {
   top: 0px;
   bottom: 0px;
+}
+
+.top-\[3px\] {
+  top: 3px;
+}
+
+.right-\[30px\] {
+  right: 30px;
+}
+
+.right-\[17px\] {
+  right: 17px;
+}
+
+.top-\[70px\] {
+  top: 70px;
+}
+
+.-right-\[500px\] {
+  right: -500px;
 }
 
 .-bottom-1 {
@@ -1157,6 +1181,16 @@ input:checked + .toggle-bg {
 
 .z-20 {
   z-index: 20;
+}
+
+.my-\[25px\] {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+.mx-\[20px\] {
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .-mx-1\.5 {
@@ -1316,6 +1350,10 @@ input:checked + .toggle-bg {
   display: none;
 }
 
+.h-\[60px\] {
+  height: 60px;
+}
+
 .h-6 {
   height: 1.5rem;
 }
@@ -1411,6 +1449,10 @@ input:checked + .toggle-bg {
   height: 0px;
 }
 
+.h-\[30px\] {
+  height: 30px;
+}
+
 .w-6 {
   width: 1.5rem;
 }
@@ -1487,6 +1529,18 @@ input:checked + .toggle-bg {
 
 .w-auto {
   width: auto;
+}
+
+.w-\[30px\] {
+  width: 30px;
+}
+
+.w-\[70px\] {
+  width: 70px;
+}
+
+.w-\[100px\] {
+  width: 100px;
 }
 
 .max-w-sm {
@@ -1669,6 +1723,12 @@ input:checked + .toggle-bg {
   gap: 1rem;
 }
 
+.space-x-\[25px\] > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(25px * var(--tw-space-x-reverse));
+  margin-left: calc(25px * calc(1 - var(--tw-space-x-reverse)));
+}
+
 .space-x-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
@@ -1709,6 +1769,12 @@ input:checked + .toggle-bg {
   --tw-space-x-reverse: 0;
   margin-right: calc(-1rem * var(--tw-space-x-reverse));
   margin-left: calc(-1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+
+.space-y-\[7px\] > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(7px * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(7px * var(--tw-space-y-reverse));
 }
 
 .divide-y > :not([hidden]) ~ :not([hidden]) {
@@ -1841,6 +1907,10 @@ input:checked + .toggle-bg {
   border-width: 2px;
 }
 
+.border-\[2px\] {
+  border-width: 2px;
+}
+
 .border-b {
   border-bottom-width: 1px;
 }
@@ -1940,6 +2010,21 @@ input:checked + .toggle-bg {
 .border-gray-700 {
   --tw-border-opacity: 1;
   border-color: rgb(55 65 81 / var(--tw-border-opacity));
+}
+
+.border-\[\#8a5422\] {
+  --tw-border-opacity: 1;
+  border-color: rgb(138 84 34 / var(--tw-border-opacity));
+}
+
+.bg-orange-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(253 186 140 / var(--tw-bg-opacity));
+}
+
+.bg-orange-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 217 189 / var(--tw-bg-opacity));
 }
 
 .\!bg-transparent {
@@ -2126,6 +2211,16 @@ input:checked + .toggle-bg {
 .bg-gray-700 {
   --tw-bg-opacity: 1;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity));
+}
+
+.bg-cyan-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(103 232 249 / var(--tw-bg-opacity));
+}
+
+.bg-cyan-100 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(207 250 254 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-50 {
@@ -2319,6 +2414,10 @@ input:checked + .toggle-bg {
   --tw-gradient-to: #d9f99d;
 }
 
+.bg-cover {
+  background-size: cover;
+}
+
 .fill-current {
   fill: currentColor;
 }
@@ -2395,6 +2494,21 @@ input:checked + .toggle-bg {
   padding: 0.5rem !important;
 }
 
+.px-\[25px\] {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.px-\[100px\] {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.py-\[20px\] {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 .py-5 {
   padding-top: 1.25rem;
   padding-bottom: 1.25rem;
@@ -2463,6 +2577,11 @@ input:checked + .toggle-bg {
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.px-\[8px\] {
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 .pl-0 {
@@ -2848,6 +2967,10 @@ input:checked + .toggle-bg {
   transition-duration: 150ms;
 }
 
+.duration-\[1000ms\] {
+  transition-duration: 1000ms;
+}
+
 .duration-75 {
   transition-duration: 75ms;
 }
@@ -2878,6 +3001,10 @@ input:checked + .toggle-bg {
 
 .duration-1000 {
   transition-duration: 1000ms;
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .ease-in {
@@ -2926,6 +3053,10 @@ a {
 
 li {
   list-style: none;
+}
+
+body {
+  overflow: hidden;
 }
 
 .after\:translate-x-full::after {
