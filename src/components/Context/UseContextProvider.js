@@ -1,23 +1,26 @@
 import React from 'react'
 import { useState, useEffect, createContext } from 'react'
-import axios from 'axios'
+import apiInstance from '../utils/utils'
 
-export const DataImgProvider = createContext()
+export const DataProfileProvider = createContext()
 
 
-const DataImg = (props) => {
+const DataProfile = (props) => {
     const [putinput, setPutInput] = useState("")
     const [axiosData, setAxiosData] = useState("")
     const [usuarioImg, setUsuarioImg] = useState("")
+    const [Open, setOpen] = useState(false)
 
    const usuarioid = localStorage.getItem("usuarioid")
 
     useEffect(() => {
-    getUser()
-    }, [])
+        if (usuarioid) {
+            getUser()
+        }
+    }, )
     
     const getUser = async () => {
-        const response = await axios.get(
+        const response = await apiInstance.get(
             process.env.REACT_APP_LOCAL_HOST + process.env.REACT_APP_EDITAR_USUARIO_APP + "/" + usuarioid
           )
           setUsuarioImg(response.data.usuario.img)
@@ -27,13 +30,13 @@ const DataImg = (props) => {
 
 
 return (
-    <DataImgProvider.Provider value={{putinput, setPutInput, axiosData, setAxiosData, usuarioImg}}>
+    <DataProfileProvider.Provider value={{putinput, setPutInput, axiosData, setAxiosData, usuarioImg, Open, setOpen}}>
         {props.children}
-    </DataImgProvider.Provider>
+    </DataProfileProvider.Provider>
   )}
 
 
-export default DataImg
+export default DataProfile
 
 
 

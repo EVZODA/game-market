@@ -1,4 +1,4 @@
-import MainRoutes from './components/MainRoutes';
+import MainRoutes from './components/Usuario/NavbarAll/MainRoutes';
 import './css/tailwind.css';
 // Run: npx tailwindcss -i ./src/css/App.css -o ./src/css/tailwind.css --watch
 // import {  } from 'flowbite-react'

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import axios from 'axios';
+import apiInstance from '../../utils/utils';
 
 const Search = () => {
 
@@ -32,15 +32,18 @@ const Search = () => {
     
 
     const getResults = async () => {
-        const requestGet = await axios.get (
+        const requestGet = await apiInstance.get (
            process.env.REACT_APP_LOCAL_HOST + process.env.REACT_APP_SEARCH_APP + searchInput.coleccionPermitida + '/' + searchInput.search
         );
         const {data} = requestGet
+        console.log(data)
+        
+
 
         setSearchInfo(data)
 
 
-        console.log(data)
+
         
     }
 
@@ -52,8 +55,8 @@ const Search = () => {
       <option value={coleccionesPermitidas[2]}>Productos</option>
     </select>
     <div className="searchcontainer">
-        <input
-          className="border-[2px] border-[#8a5422] w-[300px] w-[200px] mr-[20px]"
+        <input type='text'
+          className="border-[2px] border-[#8a5422] w-[300px] mr-[20px]"
           placeholder="Busqueda producto"
           onChange={(e) => {
             handleSearch(e);

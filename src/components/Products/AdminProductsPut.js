@@ -1,103 +1,101 @@
 import React from "react";
 import axios from "axios";
-import { useEffect, useState } from "react";
-const url = "http://localhost:8080/api/productos/:id";
+import apiInstance from "../utils/utils";
+import { useEffect, useState, useContext } from "react";
+import { DataProductsProvider } from "../Context/UseContextEdition";
+
 
 const AdminProductsPut = () => {
   useEffect(() => {
     getCategories();
   }, []);
 
-  
-    let token = localStorage.getItem("token") || "";
-    if (token.length <= 10) {
-      localStorage.clear("usuarioid", "usuario")
-      window.location = "index.html";
-      throw new Error("No hay token en el servidor");
-    }
+  let usuarioid = localStorage.getItem("usuarioid") || "";
 
-  const [putinput, setPutInput] = useState({});
+  let token = localStorage.getItem("token") || "";
 
-  const [axiosdata, setAxiosData] = useState();
-
-  const [searchInput, setSearchInput] = useState("");
 
   const [categories, setCategories] = useState([]);
 
-  const [products, setProducts] = useState([]);
+  const { setOneProducts, OneProducts} = useContext(DataProductsProvider)
 
-  const handleSearch = (e) => {
-    setSearchInput({
-      search: e.target.value,
-    });
-  };
 
   const handleUsername = (e) => {
-    setPutInput({
-      ...putinput,
+    setOneProducts({
+      ...OneProducts,
       nombre: e.target.value,
     });
   };
 
   const handlePrice = (e) => {
-    setPutInput({
-      ...putinput,
+    setOneProducts({
+      ...OneProducts,
       precio: e.target.value,
     });
   };
 
   const handleDescription = (e) => {
-    setPutInput({
-      ...putinput,
+    setOneProducts({
+      ...OneProducts,
       descripcion: e.target.value,
     });
   };
 
   const handleImg = (e) => {
-    setPutInput({
-      ...putinput,
-      img: e.target.value,
+    setOneProducts({
+      ...OneProducts,
+      img: e.target.files[0],
     });
   };
 
   const handleDisponible = (e) => {
-    setPutInput({
-      ...putinput,
+    setOneProducts({
+      ...OneProducts,
       disponible: e.target.value,
     });
   };
 
   const handleCategories = (e) => {
-    setPutInput({
-      ...putinput,
+    setOneProducts({
+      ...OneProducts,
       categoria: e.target.value,
     });
   };
 
+  const editImg = async () => {
+    let producto = "productos";
+
+    const data = new FormData();
+    data.append("archivo", OneProducts.img);
+    return await apiInstance.put(
+      process.env.REACT_APP_LOCAL_HOST +
+        process.env.REACT_APP_EDITAR_IMAGEN_APP +
+        "/" +
+        producto +
+        "/" +
+        OneProducts._id,
+      data)
+  }
+
+
   const handlePut = async () => {
+    const urlImg = await editImg()
+    OneProducts.img = urlImg.data.img
+
     let token = localStorage.getItem("token") || "";
-
-    console.log(putinput);
-
-    try {
-      let axiosresponse = await axios.put(
+    const putiano = await apiInstance.put(
         process.env.REACT_APP_LOCAL_HOST +
           process.env.REACT_APP_PRODUCTS_APP +
           "/" +
-          products[0]._id,
-        putinput,
+          OneProducts._id,
+        OneProducts,
         {
           headers: {
             "x-token": token,
           },
         }
       );
-      setAxiosData(axiosresponse);
-    } catch (error) {
-      setAxiosData(error.response);
-    }
-
-    console.log(axiosdata);
+      console.log(putiano)
   };
 
   const getCategories = async () => {
@@ -110,20 +108,7 @@ const AdminProductsPut = () => {
     console.log(data.categorias);
   };
 
-  const getProducts = async () => {
-    const requestGet = await axios.get(
-      process.env.REACT_APP_LOCAL_HOST + process.env.REACT_APP_PRODUCTS_APP
-    );
-    const { data } = requestGet;
-    console.log(data);
-    setProducts(
-      data.productos.filter(
-        (product) =>
-          product.nombre.toLowerCase() === searchInput.search.toLowerCase()
-      )
-    );
-    console.log(products);
-  };
+  
 
   return (
     <div className="flex flex-col space-y-[7px] px-[8px] items-center justify-center h-[500px]">
@@ -131,21 +116,14 @@ const AdminProductsPut = () => {
         <input
           className="border-[2px] border-[#8a5422] w-[400px] mr-[20px]"
           placeholder="Busqueda producto"
-          onChange={(e) => {
-            handleSearch(e);
-          }}
+          value={OneProducts.nombre}
         />
-        <button
-          onClick={getProducts}
-          className="border-[2px] border-[#8a5422] w-[80px]"
-        >
-          hola
-        </button>
       </div>
 
       <input
         className="border-[2px] border-[#8a5422] w-[500px]"
         placeholder="nombre"
+        value={OneProducts.nombre}
         onChange={(e) => {
           handleUsername(e);
         }}
@@ -153,6 +131,7 @@ const AdminProductsPut = () => {
       <input
         className="border-[2px] border-[#8a5422] w-[500px]"
         placeholder="precio"
+        value={OneProducts.precio}
         onChange={(e) => {
           handlePrice(e);
         }}
@@ -160,20 +139,24 @@ const AdminProductsPut = () => {
       <input
         className="border-[2px] border-[#8a5422] w-[500px]"
         placeholder="descripcion"
+        value={OneProducts.descripcion}
         onChange={(e) => {
           handleDescription(e);
         }}
       />
-      <input
-        className="border-[2px] border-[#8a5422] w-[500px]"
-        placeholder="imagen"
-        onChange={(e) => {
-          handleImg(e);
-        }}
-      />
+       <input
+          type="file"
+          onChange={(e) => {
+            handleImg(e);
+          }}
+          className="border-[2px] border-[#8a5422] w-[500px]"
+          name="archivo"
+          placeholder="img"
+        />
       <input
         className="border-[2px] border-[#8a5422] w-[500px]"
         placeholder="disponible"
+        value={OneProducts.disponible}
         onChange={(e) => {
           handleDisponible(e);
         }}
@@ -193,7 +176,6 @@ const AdminProductsPut = () => {
       >
         Editar producto
       </button>
-      <p>{axiosdata ? axiosdata.data.msg : ""}</p>
     </div>
   );
 };

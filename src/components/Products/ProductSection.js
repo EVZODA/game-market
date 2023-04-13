@@ -1,7 +1,7 @@
 import React from "react";
 import Product from "./Product";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import apiInstance from "../utils/utils";
 
 const ProductSection = () => {
   const [products, setProducts] = useState([]);
@@ -11,17 +11,16 @@ const ProductSection = () => {
   }, []);
 
   const getProducts = async () => {
-    const requestGet = await axios.get(
+    const requestGet = await apiInstance.get(
       process.env.REACT_APP_LOCAL_HOST + process.env.REACT_APP_PRODUCTS_APP
     );
     const { data } = requestGet;
     setProducts(data.productos);
-    console.log(data.productos);
   };
 
   return (
     <div className="Productsection container">
-      <ul>
+      <ul className="">
         {products.map((product, index) => (
           <Product key={index} product={product}></Product>
         ))}

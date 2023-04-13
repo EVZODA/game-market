@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { useEffect, useState } from "react";
-const url = "http://localhost:8080/api/productos/";
+import apiInstance from "../utils/utils";
 
 
 const AdminProductsPost = () => {
@@ -10,22 +10,11 @@ const AdminProductsPost = () => {
   }, []);
 
 
-  let token = localStorage.getItem("token") || "";
-    if (token.length <= 10) {
-      localStorage.clear("usuarioid", "usuario")
-      window.location = "index.html";
-      throw new Error("No hay token en el servidor");
-    }
 
-  
 
   const [postInput, setPostInput] = useState({});
 
-  const [searchInput, setSearchInput] = useState("");
-
   const [categories, setCategories] = useState([]);
-
-  const [products, setProducts] = useState([]);
 
   const [responseData, setResponseData ] = useState()
 
@@ -55,8 +44,8 @@ const AdminProductsPost = () => {
   const handleImg = (e) => {
     setPostInput({
       ...postInput,
-      img: e.target.value,
-    });
+      img: e.target.files[0],
+    })
   };
 
   const handleDisponible = (e) => {
@@ -73,15 +62,32 @@ const AdminProductsPost = () => {
     });
   };
 
+
+  const SubirArchivo = async () => {
+    let productos= "productos";
+
+    const data = new FormData();
+    data.append("archivo", postInput.img);
+    return await apiInstance.post(
+      process.env.REACT_APP_LOCAL_HOST +
+        process.env.REACT_APP_EDITAR_IMAGEN_APP +
+        "/" +
+        productos,
+      data
+    )};
+
+
   const handlePost = async () => {
-    try {
-      let adminrol = localStorage.getItem("usuario") || ""
+
+   const urlCloudinary = await SubirArchivo()
+   postInput.img = urlCloudinary.data.img
+    
       let token = localStorage.getItem("token") || "";
   
   
       console.log(postInput);
   
-      const axioresponse = await axios.post(
+     await apiInstance.post(
         process.env.REACT_APP_LOCAL_HOST + process.env.REACT_APP_PRODUCTS_APP,
         postInput,
         {
@@ -90,10 +96,6 @@ const AdminProductsPost = () => {
           },
         }
       );
-      setResponseData(axioresponse)
-    } catch (error) {
-      setResponseData(error.response)
-    }
    
   };
 
@@ -107,17 +109,7 @@ const AdminProductsPost = () => {
     console.log(data.categorias);
   };
 
-  const getProducts = async () => {
-    const requestGet = await axios.get(
-      process.env.REACT_APP_LOCAL_HOST + process.env.REACT_APP_PRODUCTS_APP
-    );
-    const { data } = requestGet;
-    setProducts(
-      data.productos.filter((product) => product.nombre.toLowerCase() === searchInput.search.toLowerCase() )
-    );
-    console.log(products);
-    console.log(searchInput.search)
-  };
+ 
 
   return (
     <div className="flex flex-col space-y-[7px] px-[8px] items-center justify-center h-[500px]">
@@ -143,13 +135,15 @@ const AdminProductsPost = () => {
           handleDescription(e);
         }}
       />
-      <input
-        className="border-[2px] border-[#8a5422] w-[500px]"
-        placeholder="imagen"
-        onChange={(e) => {
-          handleImg(e);
-        }}
-      />
+       <input
+          type="file"
+          onChange={(e) => {
+            handleImg(e);
+          }}
+          className="border-[2px] border-[#8a5422] w-[350px]"
+          name="archivo"
+          placeholder="img"
+        />
       <input
         className="border-[2px] border-[#8a5422] w-[500px]"
         placeholder="disponible"
@@ -172,7 +166,6 @@ const AdminProductsPost = () => {
       >
         crear producto
       </button>
-      <p>{responseData? responseData.data.msg: ""}</p>
     </div>
   );
 };

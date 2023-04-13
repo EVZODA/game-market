@@ -1,6 +1,6 @@
 import React from 'react'
-import closed from '../img/cruz.png'
-import openimg from '../img/menu.png'
+import closed from '../../../img/cruz.png'
+import openimg from '../../../img/menu.png'
 
 
 
