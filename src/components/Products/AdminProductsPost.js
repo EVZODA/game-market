@@ -16,7 +16,6 @@ const AdminProductsPost = () => {
 
   const [categories, setCategories] = useState([]);
 
-  const [responseData, setResponseData ] = useState()
 
 
 
@@ -95,7 +94,10 @@ const AdminProductsPost = () => {
             "x-token": token,
           },
         }
-      );
+      ).then(()=>{setPostInput(null)
+        window.location = "/"
+      }).catch(
+      ) ;
    
   };
 
@@ -112,57 +114,60 @@ const AdminProductsPost = () => {
  
 
   return (
-    <div className="flex flex-col space-y-[7px] px-[8px] items-center justify-center h-[500px]">
+    <div className="flex flex-col space-y-[7px] px-[8px] items-center justify-start h-[600px]">
 
       <input
-        className="border-[2px] border-[#8a5422] w-[500px]"
+        className="py-2 mt-[40px] w-[350px] border-[1px] border-black rounded-[3px]"
         placeholder="nombre"
         onChange={(e) => {
           handleUsername(e);
         }}
       />
       <input
-        className="border-[2px] border-[#8a5422] w-[500px]"
+        className="py-2 w-[350px] border-[1px] border-black rounded-[3px]"
         placeholder="precio"
         onChange={(e) => {
           handlePrice(e);
         }}
       />
       <input
-        className="border-[2px] border-[#8a5422] w-[500px]"
+        className="py-2 w-[350px] border-[1px] border-black rounded-[3px]"
         placeholder="descripcion"
         onChange={(e) => {
           handleDescription(e);
         }}
       />
-       <input
+      <label htmlFor="archivo" className="border-none rounded-[7px]  py-[10px] w-[350px] flex justify-center items-center hover:bg-yellow-300 cursor-pointer bg-yellow-200">cargar imagen</label>
+       <input id="archivo"
           type="file"
           onChange={(e) => {
             handleImg(e);
           }}
-          className="border-[2px] border-[#8a5422] w-[350px]"
+          className="hidden"
           name="archivo"
           placeholder="img"
         />
       <input
-        className="border-[2px] border-[#8a5422] w-[500px]"
+        className="py-2 w-[350px] border-[1px] border-black rounded-[3px]"
         placeholder="disponible"
         onChange={(e) => {
           handleDisponible(e);
         }}
       />
       <select
+      className="py-2 w-[350px] border-[1px] border-black rounded-[3px]"
         onChange={(e) => {
           handleCategories(e);
         }}
       >
+          {postInput.categoria != null ? "" : <option selected="true" disabled></option>}
         {categories.map((categoria) => {
           return <option value={categoria._id}>{categoria.nombre}</option>;
         })}
       </select>
       <button
         onClick={handlePost}
-        className="border-[2px] border-[#8a5422] w-[500px]"
+        className="px-[40px] mt-[20px] h-[40px] bg-yellow-200 rounded-[8px] pointer-events-auto hover:bg-yellow-300"
       >
         crear producto
       </button>

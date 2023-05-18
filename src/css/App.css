@@ -43,5 +43,18 @@ li {
 }
 
 body {
-    overflow: hidden;
+    overflow-x: hidden;
 }
+
+.container-img:hover>.container-description {
+opacity: 1;
+pointer-events: auto;
+}
+
+.container-description {
+background-color:hsla(0, 0%, 10%, 0.446) ;
+opacity: 0;
+pointer-events: none;
+transition: all 0.3s;
+}
+

@@ -19,10 +19,10 @@ const ProductSection = () => {
   };
 
   return (
-    <div className="Productsection container">
-      <ul className="">
+    <div className="Productsection bg-slate-200 py-[70px]">
+      <ul className="flex flex-wrap justify-center gap-6">
         {products.map((product, index) => (
-          <Product key={index} product={product}></Product>
+            <Product key={index} product={product}></Product>
         ))}
       </ul>
     </div>

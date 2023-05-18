@@ -1,12 +1,16 @@
 
 import shoppingCart from '../../../img/shoppingCart.svg'
 import { Link } from 'react-router-dom'
+import { useContext, useEffect } from 'react'
+import { DataItemsInCart } from '../../Context/UserContextCart'
 
 const ProfileUser = () => {
 
 
   const token = localStorage.getItem("token")
+  const userRole = localStorage.getItem("usuario")
 
+ 
 
 
 
@@ -17,9 +21,9 @@ const ProfileUser = () => {
     
 
   return (
-    <div className='h-[60px]'>
+    <div className='my-[20px] lg:my-[0px]'>
          <Link to="/cart">{
-          !token? "" : <img alt='' className="h-[60px] mt-[5px]" src={shoppingCart}/>
+          !token || userRole==="ADMIN_ROLE"?"" : <img alt='' className="h-[40px]" src={shoppingCart}/>
          }
          </Link>
     </div>

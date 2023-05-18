@@ -12,6 +12,7 @@ const DataProfile = (props) => {
     const [Open, setOpen] = useState(false)
 
    const usuarioid = localStorage.getItem("usuarioid")
+   const token = localStorage.getItem("token")
 
     useEffect(() => {
         if (usuarioid) {
@@ -21,7 +22,11 @@ const DataProfile = (props) => {
     
     const getUser = async () => {
         const response = await apiInstance.get(
-            process.env.REACT_APP_LOCAL_HOST + process.env.REACT_APP_EDITAR_USUARIO_APP + "/" + usuarioid
+            process.env.REACT_APP_LOCAL_HOST + process.env.REACT_APP_EDITAR_USUARIO_APP + "/" + usuarioid, {
+                headers: {
+                    "x-token" : token
+                }
+            }
           )
           setUsuarioImg(response.data.usuario.img)
     }

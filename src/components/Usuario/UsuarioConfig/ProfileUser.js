@@ -20,9 +20,9 @@ const ProfileUser = () => {
     
 
   return (
-    <div className='h-[60px]'>
+    <div className=''>
          <Link to="/profileuser">{
-          !token? "" : <img alt='' className="h-[60px] mt-[5px]" src={usuarioImg? usuarioImg: person}/>
+          !token? "" : <img alt='' className="h-[40px] border-white rounded-[7px] mb-[20px] lg:mb-[0px]" src={usuarioImg? usuarioImg: person}/>
          }
          </Link>
     </div>

@@ -5,9 +5,11 @@ import {useState, createContext} from 'react'
 export const DataProductsProvider = createContext()
 
 const UseContextEdition = (props) => {
-    const [OneProducts, setOneProducts] = useState("")
-    const [OneCategories, setOneCategories] = useState("")
+    const [OneProducts, setOneProducts] = useState(null)
+    const [OneCategories, setOneCategories] = useState(null)
     const [products, setProducts] = useState([]);
+
+    
 
   return (
     <DataProductsProvider.Provider value={{OneProducts, setOneProducts, setOneCategories, OneCategories, products, setProducts}}>

@@ -1,5 +1,6 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Routes, Location, Navigate} from 'react-router-dom'
+import { useContext } from 'react'
+import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom'
 import Cart from '../cart/Cart'
 import Login from '../UsuarioConfig/Login'
 import Register from '../UsuarioConfig/Register'
@@ -8,30 +9,42 @@ import Navbar from './Navbar'
 import Inicio from '../Inicio'
 import ProductSection from '../../Products/ProductSection'
 import PutUser from '../UsuarioConfig/PutUser'
-import DataImg from "../../Context/UseContextProvider"
-import UseContextEdition from '../../Context/UseContextEdition'
 import AdminCategories from '../../Categories/AdminCategories'
 import CategoriesSection from '../../Categories/CategoriesSection'
 import IForgetPassword from '../UsuarioConfig/IForgetPassword'
 import ResetPasswordParams from '../UsuarioConfig/ResetPasswordParams'
 import UserContextCart from '../../Context/UserContextCart'
+import PurchaseCartSuccess from '../cart/PurchaseCartSuccess'
+import { DataProductsProvider } from "../../Context/UseContextEdition";
+import DataProfile from '../../Context/UseContextProvider'
+import HistorialPayments from '../cart/HistorialPayments'
+import SearchInfo from './SearchInfo'
+import Footer from '../../Footer/Footer'
+import { DataItemsInCart } from '../../Context/UserContextCart'
+import { useEffect } from 'react'
+
 
 const MainRoutes = () => {
-
+  const {setOneProducts, OneProducts} = useContext(DataProductsProvider);
   const token = localStorage.getItem("token")
   const adminrole = localStorage.getItem("usuario")
+
+  
+
   return (
     <UserContextCart>
-    <DataImg>
-      <UseContextEdition>
+    <DataProfile>
     <Router>
       <Navbar/>
         <Routes>
             <Route path='/' element={<Inicio/>}/>
+            <Route path='/queryPayment' element={<PurchaseCartSuccess/>}/>
             <Route path='/profileuser' element={!token? "" : <PutUser/>}/>
             <Route path='/register' element={!token? <Register/> : <Navigate to= "/"/>}/>
             <Route path='/login'  element={!token? <Login/> : <Navigate to= "/"/>}/>
-            <Route path='/cart'  element={token? <Cart/> : <Navigate to= "/"/>}/>
+            <Route path='/cart'  element={token &&  adminrole!=="ADMIN_ROLE"? <Cart/> : <Navigate to= "/"/>}/>
+            <Route path='/historialPayments' element={token? <HistorialPayments/> : <Navigate to= "/"/>}/>
+            <Route path='/searchInfo' element={<SearchInfo/>}/>
             <Route path='/productsection' element={adminrole==="ADMIN_ROLE"?<ProductSection/> : <Navigate to= "/"/>}/>
             <Route path='/adminproducts'  element={adminrole==="ADMIN_ROLE"?<AdminProducts/> : <Navigate to= "/"/>}/>
             <Route path='/categoriesection'  element={adminrole==="ADMIN_ROLE"?<CategoriesSection/> : <Navigate to= "/"/>}/>
@@ -40,9 +53,9 @@ const MainRoutes = () => {
             <Route path="/resetpassword/:token" element={<ResetPasswordParams/>} />
           
         </Routes>
+        <Footer/>
     </Router>
-    </UseContextEdition>
-    </DataImg>
+    </DataProfile>
     </UserContextCart>
   )
 }

@@ -29,16 +29,30 @@ const PutUser = () => {
   };
 
   const handlePutUser = async () => {
-    console.log(putinput);
-    console.log(usuarioid);
-   
+    let img;
+    if (putinput.img) {
+      img = await SubirArchivo();
+      putinput.img = img
+    }
+    
       const axiosresponse = await apiInstance.put(
         process.env.REACT_APP_LOCAL_HOST +
           process.env.REACT_APP_EDITAR_USUARIO_APP +
           "/" +
-          usuarioid
+          usuarioid,
+          putinput,
+          {
+            headers: {
+              "x-token": token,
+            },
+          }
       );
       setAxiosData(axiosresponse);
+      setPutInput({
+        ...putinput,
+        img: undefined
+      })
+      
   };
 
   // Subir archivos
@@ -60,6 +74,7 @@ const PutUser = () => {
     const msg = axiosresponse.data.msg;
     window.localStorage.setItem("usuarioimg", img);
     setAxiosData({ img, msg });
+    return img;
   };
 
   //Borrar de la cuenta
@@ -99,53 +114,56 @@ const PutUser = () => {
   };
 
   return (
-    <div className="flex flex-col space-y-[7px] px-[8px] items-center mt-[80px]">
+    <div className="flex flex-col space-y-[7px] px-[8px] items-center pt-[80px] bg-slate-200 min-h-[700px]">
       <input
         type="text"
         onChange={(e) => {
           handleName(e);
         }}
-        className="border-[2px] border-[#8a5422] w-[500px]"
+        className="rounded-[7px] py-[10px] lg:w-[500px] w-[300px] bg-white border-none"
         placeholder="Nombre"
       />
-      <div className="flex w-[500px] space-x-[20px] justify-center">
-        <input
+      <div className="flex lg:w-[500px] w-[300px] space-x-[20px] justify-center">
+        <label htmlFor="archivo" className=" border-none rounded-[7px]  py-[10px] lg:w-[350px] w-[200px] flex justify-center items-center hover:bg-slate-100 cursor-pointer bg-white">
+          cargar imagen
+        </label>
+        <input id="archivo"
           type="file"
           onChange={(e) => {
             handleImg(e);
           }}
-          className="border-[2px] border-[#8a5422] w-[350px]"
+          className="hidden"
           name="archivo"
           placeholder="img"
         />
         <button
           onClick={SubirArchivo}
-          className="border-[2px] border-[#8a5422] w-[150px]"
+          className="border-none rounded-[7px] py-[10px] w-[150px] hover:bg-slate-100 bg-white"
         >
-          Agregar imagen
+          subir imagen
         </button>
         <button
           onClick={DeleteImg}
-          className="border-[2px] border-[#8a5422] w-[150px]"
+          className=" border-none rounded-[7px] py-[10px] w-[150px] hover:bg-slate-100 bg-white"
         >
           Borrar imagen
         </button>
       </div>
       <button
         onClick={handlePutUser}
-        className="border-[2px] border-[#8a5422] w-[500px]"
+        className=" border-none rounded-[7px] py-[10px] lg:w-[500px] w-[300px] hover:bg-slate-100 bg-white"
       >
         Editar Usuario
       </button>
-      <div className="flex w-[500px] space-x-[20px] justify-center">
+      <div className="flex w-[300px] lg:w-[500px] space-x-[20px] justify-center">
         <button
-          className="border-[2px] border-[#8a5422] w-[250px]"
+          className=" border-none rounded-[7px] py-[10px] w-[250px] hover:bg-slate-100 bg-white"
           onClick={logout}
         >
           Deslogear Cuenta
         </button>
         <button
-          className="border-[2px] border-[#8a5422] w-[250px]"
+          className=" border-none rounded-[7px] py-[10px] w-[250px] hover:bg-slate-100 bg-white"
           onClick={DesactivarCuenta}
         >
           Desactivar Cuenta
@@ -158,7 +176,9 @@ const PutUser = () => {
         onClick={() => {
           setOpen(true);
         }}
-        className="border-[2px] border-[#8a5422] w-[250px]"
+        className={`border-none rounded-[7px] py-[10px] lg:w-[250px] w-[200px] hover:bg-slate-100 bg-white ${
+          Open === true ? "hidden" : ""
+        } `}
       >
         Cambiar mi contraseña
       </button>
@@ -166,7 +186,7 @@ const PutUser = () => {
         onClick={() => {
           setOpen(false);
         }}
-        className={`border-[2px] border-[#8a5422] w-[250px] ${
+        className={`border-none rounded-[7px] py-[10px] w-[250px] hover:bg-slate-100 bg-white ${
           Open === false ? "hidden" : ""
         } `}
       >

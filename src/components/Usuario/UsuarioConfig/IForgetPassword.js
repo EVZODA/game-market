@@ -30,10 +30,10 @@ const IForgetPassword = () => {
     }
 
   return (
-    <div className=''>
-        <input type='text' onChange={(e)=>{handleCorreo(e)}} placeholder='Correo'/>
-        <input type='password' onChange={(e)=>{handlePalabraClave(e)}} placeholder='Palabra clave'/>
-        <button onClick={SubmitCorreo}>Enviar correo para reeestablecer contraseña</button>
+    <div className='flex flex-col items-center py-[70px] space-y-3'>
+        <input type='text' className='w-[300px] py-2 border-[1px] border-black rounded-[3px]' onChange={(e)=>{handleCorreo(e)}} placeholder='Correo'/>
+        <input type='password' className='w-[300px] py-2 border-[1px] border-black rounded-[3px]'  onChange={(e)=>{handlePalabraClave(e)}} placeholder='Palabra clave'/>
+        <button className='p-[10px] mt-[20px] bg-yellow-200 rounded-[6px] pointer-events-auto hover:bg-yellow-300' onClick={SubmitCorreo}>Reestablecer contraseña</button>
     </div>
   )
 }

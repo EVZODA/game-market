@@ -1,23 +1,44 @@
 import React from 'react'
-import { useState } from 'react';
+import {useState, useEffect} from 'react';
 import apiInstance from '../../utils/utils';
+import {createSearchParams, useNavigate } from 'react-router-dom';
+
+
 
 const Search = () => {
 
-    const [searchInput, setSearchInput] = useState()
+    const [searchInput, setSearchInput] = useState({})
 
-    const [searchInfo, setSearchInfo] = useState()
+    const navigate = useNavigate()
+
+    const [categories, setCategories] = useState([]);
+
+    
+
+  useEffect(() => {
+    getCategories();
+  }, []);
+
+  const getCategories = async () => {
+    const requestGet = await apiInstance.get(
+      process.env.REACT_APP_LOCAL_HOST + process.env.REACT_APP_CATEGORIES_APP
+    );
+    const { data } = requestGet;
+    setCategories(data.categorias);
+    console.log(data.categorias);
+  };
+
+
+
 
     const coleccionesPermitidas = [
-        'usuarios',
-        'categorias',
         'productos',
     ];
 
-    const handleColecciones= (e) => {
+    const handleCategories= (e) => {
         setSearchInput({
         ...searchInput,
-          coleccionPermitida: e.target.value,
+          categoria: e.target.value,
         });
       };
 
@@ -32,42 +53,64 @@ const Search = () => {
     
 
     const getResults = async () => {
-        const requestGet = await apiInstance.get (
-           process.env.REACT_APP_LOCAL_HOST + process.env.REACT_APP_SEARCH_APP + searchInput.coleccionPermitida + '/' + searchInput.search
-        );
-        const {data} = requestGet
-        console.log(data)
-        
+      
+      // Problema de actualizacion del state 
+      
+      //  if (!searchInput.search) {
+      //   setSearchInput({
+      //     ...searchInput,
+      //     search: "",
+      // });
+      //  }
+      //  if (!searchInput.categoria) {
+      //   setSearchInput({
+      //     ...searchInput,
+      //     categoria: "productos",
+      // });
+      //  }
+      //   navigate({pathname: "searchInfo", search: `?${createSearchParams(searchInput)}`})
 
+      const params = {
+        search: searchInput.search,
+        categoria:searchInput.categoria
+      }
+    
+       if (!params.search) {
+        params.search = ""
+       }
+       if (!params.categoria) {
+        params.categoria = "productos"
+       }
+        navigate({pathname: "searchInfo", search: `?${createSearchParams(params)}`})
 
-        setSearchInfo(data)
-
-
-
-        
     }
 
+
+
+
   return (
-    <div className="contain-buscador flex space-x-[25px] my-[25px]">
-    <select onChange={handleColecciones} name="lenguajes" id="lang">
-      <option value={coleccionesPermitidas[0]}>Usuarios</option>
-      <option value={coleccionesPermitidas[1]}>Categorias</option>
-      <option value={coleccionesPermitidas[2]}>Productos</option>
+    <div className="contain-buscador flex flex-col h-[140px] lg:flex-row lg:space-x-6 lg:h-[40px]">
+    <select className='mb-[5px] lg:mb-[0px] lg:w-[200px] rounded-[5px] border-none w-full lg:h-full' onChange={handleCategories} name="lenguajes" id="lang">
+    <option value={coleccionesPermitidas[0]}></option>
+    {categories.map((categorie, index)=>{
+      return (<option key={index} value={categorie.nombre}>{categorie.nombre}</option>)
+    })}
     </select>
-    <div className="searchcontainer">
+    <div className="flex flex-col lg:flex lg:flex-row lg:h-full lg:items-center h-full">
         <input type='text'
-          className="border-[2px] border-[#8a5422] w-[300px] mr-[20px]"
+          className=" rounded-[5px] border-none mr-[20px] mb-[5px]  lg:mb-[0px] lg:h-full w-full"
           placeholder="Busqueda producto"
           onChange={(e) => {
             handleSearch(e);
           }}
         />
         <button
-          onClick={getResults}
-          className="border-[2px] border-[#8a5422] w-[80px]"
+          onClick={()=>{getResults()}}
+          className="rounded-[5px] border-none mr-[20px] mb-[5px] lg:mb-[0px] lg:h-full bg-white px-[7px] h-full w-full"
         >
-          hola
+          buscar
         </button>
+        {}
       </div>
   </div>
   )

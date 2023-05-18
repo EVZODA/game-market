@@ -21,7 +21,7 @@ const CategoriesSection = () => {
 
   return (
     <div className="Productsection container">
-      <ul>
+      <ul className="flex justify-center space-x-6">
         {categories.map((categorie, index) => (
           <Categorie key={index} categorie={categorie}></Categorie>
         ))}

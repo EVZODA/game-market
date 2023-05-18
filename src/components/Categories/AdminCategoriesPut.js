@@ -39,11 +39,10 @@ const AdminCategoriesPut= () => {
 
 
   return (
-    <div className="flex flex-col space-y-[7px] px-[8px] items-center justify-center h-[500px]">
-      <div className='flex flex-col justify-center items-center'>
-      <input onChange={(e)=>{handleName(e)}} className='border-[2px] border-[#8a5422] w-[400px] mr-[20px]' placeholder="nombre nuevo" />
-        <button onClick={handlePut} className='border-[2px] border-[#8a5422] w-[400px] mr-[20px]'>Editar</button>
-      </div>
+    <div className="flex flex-col space-y-[7px] px-[8px] items-center justify-start h-[600px]">
+
+      <input onChange={(e)=>{handleName(e)}} className='py-2 mt-[40px] w-[350px] border-[1px] border-black rounded-[3px]' placeholder="nombre nuevo" />
+        <button onClick={handlePut} className='px-[40px] mt-[20px] h-[40px] bg-yellow-200 rounded-[8px] pointer-events-auto hover:bg-yellow-300'>Editar</button>
     </div>
   );
 };

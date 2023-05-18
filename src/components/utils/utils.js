@@ -17,7 +17,7 @@ apiInstance.interceptors.response.use(
         status: 999,
         timestamp: new Date(),
         message: "Se ha producido un error inesperado",
-        error: "Error inesperado"
+        error: err
       });
     }
     alert(err.response.data.msg)
@@ -32,6 +32,7 @@ apiInstance.interceptors.response.use(
     
   }
 );
+
 
 
 export default apiInstance;

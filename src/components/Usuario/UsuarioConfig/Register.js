@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { useState,  useEffect} from 'react'
+import { useState} from 'react'
 import apiInstance from '../../utils/utils'
 
 
@@ -63,14 +63,14 @@ const Register = () => {
   }
   
     return (
-        <div className='flex flex-col space-y-[7px] px-[8px] items-center justify-center h-[500px]'>
-        <input type='text' onChange={handleName} className='border-[2px] border-[#8a5422] w-[500px]' placeholder='Nombre'/>
-        <input type='text' onChange={handleEmail} className='border-[2px] border-[#8a5422] w-[500px]' placeholder='Correo' />
-        <input type='password' onChange={handleRecordingPassword} className='border-[2px] border-[#8a5422] w-[500px]' placeholder='Palabra clave' />
-        <input type='password' onChange={handlePassword} className='border-[2px] border-[#8a5422] w-[500px]' placeholder='Contraseña' />
-        <button onClick={handleRegister} className='border-[2px] border-[#8a5422] w-[500px]'>enviar</button>
+        <div className='flex flex-col mx-2 space-y-[10px] px-[8px] items-center py-[100px] bg-slate-50 min-h-[100vh]'>
+        <input type='text' onChange={handleName} className='py-2 w-[500px] max-w-full border-[1px] border-black rounded-[3px]' placeholder='Nombre'/>
+        <input type='text' onChange={handleEmail} className='py-2 w-[500px] max-w-full border-[1px] border-black rounded-[3px]' placeholder='Correo' />
+        <input type='password' onChange={handleRecordingPassword} className='py-2  w-[500px] max-w-full border-[1px] border-black rounded-[3px]' placeholder='Palabra clave' />
+        <input type='password' onChange={handlePassword} className='py-2  w-[500px] max-w-full border-[1px] border-black rounded-[3px]' placeholder='Contraseña' />
+        <button onClick={handleRegister} className='btn btn-primary mt-[15px] px-[40px] h-[40px] bg-yellow-200 rounded-[8px] pointer-events-auto hover:bg-yellow-300'>enviar</button>
   
-        <div className='mx-[20px]'><Link to='/login'>Si ya tiene una cuente inicia sesion aqui</Link></div>
+        <button className='rounded-[8px] pointer-events-auto hover:underline'><Link to='/login'>Si ya tiene una cuenta inicia sesion aqui</Link></button>
         </div>
       )
     }

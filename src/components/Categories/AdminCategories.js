@@ -1,24 +1,34 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import AdminCategoriesPost from './AdminCategoriesPost';
 import AdminCategoriesPut from './AdminCategoriesPut';
 import AdminCategoriesDelete from './AdminCategoriesDelete';
+import {DataProductsProvider} from '../Context/UseContextEdition'
 
 const AdminCategories = () => {
     const [action, setAction] = useState("");
+    const { OneCategories, setOneCategories} = useContext(DataProductsProvider)
+
+    useEffect(() => {
+      setOneCategories(OneCategories)
+    
+      return () => {
+        setOneCategories(null)
+      }
+    }, [])
   
     return (
-      <div className="flex flex-col  items-center justify-center">
+      <div className="flex flex-col  items-center justify-start  bg-slate-50 min-h-[100vh]">
         <div className="controllercontainer space-x-7 mt-[50px]">
-          <button className="mb-1 " onClick={() => setAction("postCategorie")}>
+           <button className="btn btn-primary mt-[15px] px-[40px] h-[40px] bg-yellow-200 rounded-[8px] pointer-events-auto hover:bg-yellow-300" onClick={() => setAction("postCategorie")}>
             Agregar categoria
           </button>
-          <button className="mb-1 " onClick={() => setAction("putCategorie")}>
+          {OneCategories===null?"" : <button className="btn btn-primary mt-[15px] px-[40px] h-[40px] bg-yellow-200 rounded-[8px] pointer-events-auto hover:bg-yellow-300" onClick={() => setAction("putCategorie")}>
             Editar categoria
-          </button>
-          <button className="mb-1 " onClick={() => setAction("deleteCategorie")}>
+          </button>}
+          {OneCategories===null?"" : <button className="btn btn-primary mt-[15px] px-[40px] h-[40px] bg-yellow-200 rounded-[8px] pointer-events-auto hover:bg-yellow-300" onClick={() => setAction("deleteCategorie")}>
             Eliminar Categoria
-          </button>
+          </button>}
         </div>
         <div>
           {action === "postCategorie" ? <AdminCategoriesPost /> : ""}

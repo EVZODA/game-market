@@ -4,21 +4,14 @@ import apiInstance from "../utils/utils";
 import { useEffect, useState, useContext } from "react";
 import { DataProductsProvider } from "../Context/UseContextEdition";
 
-
 const AdminProductsPut = () => {
   useEffect(() => {
     getCategories();
   }, []);
 
-  let usuarioid = localStorage.getItem("usuarioid") || "";
-
-  let token = localStorage.getItem("token") || "";
-
-
   const [categories, setCategories] = useState([]);
 
-  const { setOneProducts, OneProducts} = useContext(DataProductsProvider)
-
+  const { setOneProducts, OneProducts } = useContext(DataProductsProvider);
 
   const handleUsername = (e) => {
     setOneProducts({
@@ -74,29 +67,33 @@ const AdminProductsPut = () => {
         producto +
         "/" +
         OneProducts._id,
-      data)
-  }
-
+      data
+    );
+  };
 
   const handlePut = async () => {
-    const urlImg = await editImg()
-    OneProducts.img = urlImg.data.img
+    const urlImg = await editImg();
+    OneProducts.img = urlImg.data.img;
 
     let token = localStorage.getItem("token") || "";
-    const putiano = await apiInstance.put(
-        process.env.REACT_APP_LOCAL_HOST +
-          process.env.REACT_APP_PRODUCTS_APP +
-          "/" +
-          OneProducts._id,
-        OneProducts,
-        {
-          headers: {
-            "x-token": token,
-          },
-        }
-      );
-      console.log(putiano)
+    const putt = await apiInstance.put(
+      process.env.REACT_APP_LOCAL_HOST +
+        process.env.REACT_APP_PRODUCTS_APP +
+        "/" +
+        OneProducts._id,
+      OneProducts,
+      {
+        headers: {
+          "x-token": token,
+        },
+      }
+    ).then(()=>{setOneProducts(null)
+      window.location = "/"
+    }).catch(
+    )
+  
   };
+
 
   const getCategories = async () => {
     const requestGet = await axios.get(
@@ -108,20 +105,20 @@ const AdminProductsPut = () => {
     console.log(data.categorias);
   };
 
-  
-
   return (
-    <div className="flex flex-col space-y-[7px] px-[8px] items-center justify-center h-[500px]">
+    <div className="flex flex-col space-y-[7px] px-[8px] items-center justify-start h-[600px]">
       <div className="searchcontainer">
         <input
-          className="border-[2px] border-[#8a5422] w-[400px] mr-[20px]"
+          type="text"
+          className="py-2 mt-[40px] w-[350px] border-[1px] border-black rounded-[3px]"
           placeholder="Busqueda producto"
           value={OneProducts.nombre}
         />
       </div>
 
       <input
-        className="border-[2px] border-[#8a5422] w-[500px]"
+        type="text"
+        className="py-2 w-[350px] border-[1px] border-black rounded-[3px]"
         placeholder="nombre"
         value={OneProducts.nombre}
         onChange={(e) => {
@@ -129,7 +126,8 @@ const AdminProductsPut = () => {
         }}
       />
       <input
-        className="border-[2px] border-[#8a5422] w-[500px]"
+        type="text"
+        className="py-2 w-[350px] border-[1px] border-black rounded-[3px]"
         placeholder="precio"
         value={OneProducts.precio}
         onChange={(e) => {
@@ -137,24 +135,33 @@ const AdminProductsPut = () => {
         }}
       />
       <input
-        className="border-[2px] border-[#8a5422] w-[500px]"
+        type="text"
+        className="py-2 w-[350px] border-[1px] border-black rounded-[3px]"
         placeholder="descripcion"
         value={OneProducts.descripcion}
         onChange={(e) => {
           handleDescription(e);
         }}
       />
-       <input
-          type="file"
-          onChange={(e) => {
-            handleImg(e);
-          }}
-          className="border-[2px] border-[#8a5422] w-[500px]"
-          name="archivo"
-          placeholder="img"
-        />
+      <label
+        htmlFor="archivo"
+        className=" border-none rounded-[7px]  py-[10px] w-[350px] flex justify-center items-center hover:bg-yellow-300 cursor-pointer bg-yellow-200"
+      >
+        cargar imagen
+      </label>
       <input
-        className="border-[2px] border-[#8a5422] w-[500px]"
+        id="archivo"
+        type="file"
+        onChange={(e) => {
+          handleImg(e);
+        }}
+        className="hidden"
+        name="archivo"
+        placeholder="img"
+      />
+      <input
+        type="text"
+        className="py-2 w-[350px] border-[1px] border-black rounded-[3px]"
         placeholder="disponible"
         value={OneProducts.disponible}
         onChange={(e) => {
@@ -162,17 +169,19 @@ const AdminProductsPut = () => {
         }}
       />
       <select
+        className="py-2 w-[350px] border-[1px] border-black rounded-[3px]"
         onChange={(e) => {
           handleCategories(e);
         }}
       >
+        {OneProducts.categoria != null ? "" : <option selected="true" disabled></option>}
         {categories.map((categoria) => {
           return <option value={categoria._id}>{categoria.nombre}</option>;
         })}
       </select>
       <button
         onClick={handlePut}
-        className="border-[2px] border-[#8a5422] w-[500px]"
+        className="px-[40px] mt-[20px] h-[40px] bg-yellow-200 rounded-[8px] pointer-events-auto hover:bg-yellow-300"
       >
         Editar producto
       </button>

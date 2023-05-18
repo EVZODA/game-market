@@ -1,5 +1,9 @@
 import MainRoutes from './components/Usuario/NavbarAll/MainRoutes';
 import './css/tailwind.css';
+import UseContextEdition from './components/Context/UseContextEdition'
+import UserContextCart from './components/Context/UserContextCart';
+
+
 // Run: npx tailwindcss -i ./src/css/App.css -o ./src/css/tailwind.css --watch
 // import {  } from 'flowbite-react'
 // import {  } from '@heroicons/react/24/outline'
@@ -7,7 +11,12 @@ import './css/tailwind.css';
 
 function App() {
   return (
-   <MainRoutes></MainRoutes>
+    <UserContextCart>
+<UseContextEdition>
+   <MainRoutes>
+   </MainRoutes>
+   </UseContextEdition>
+   </UserContextCart>
    
   );
 }
