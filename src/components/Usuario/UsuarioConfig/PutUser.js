@@ -10,7 +10,7 @@ const PutUser = () => {
 
   let token = localStorage.getItem("token") || "";
 
-  const { putinput, setPutInput, axiosData, setAxiosData, Open, setOpen } =
+  const { putinput, setPutInput, setAxiosData, Open, setOpen } =
     useContext(DataProfileProvider);
 
   const handleName = (e) => {

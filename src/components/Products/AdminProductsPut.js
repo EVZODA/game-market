@@ -76,7 +76,7 @@ const AdminProductsPut = () => {
     OneProducts.img = urlImg.data.img;
 
     let token = localStorage.getItem("token") || "";
-    const putt = await apiInstance.put(
+    await apiInstance.put(
       process.env.REACT_APP_LOCAL_HOST +
         process.env.REACT_APP_PRODUCTS_APP +
         "/" +

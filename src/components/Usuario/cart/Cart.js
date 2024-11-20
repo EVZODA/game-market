@@ -35,16 +35,6 @@ const Cart = () => {
       <p className="">Precio total</p>
   <p className="pr-[30px]">{precioTotal}</p>
  
-  {/* <div id="wallet_container">
-    <Wallet
-      onSubmit={handlePayment}
-      initialization={{
-        preferenceId: "<PREFERENCE_ID>",
-        redirectMode: "modal",
-      }}
-    />
-  </div> */}
-  
     
   </div>
       <CartPayment></CartPayment>

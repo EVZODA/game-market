@@ -14,7 +14,6 @@ const Product = ({ product }) => {
 
   const {
     addProductIncart,
-    deleteProductsIncart,
     productsInCart,
     getProductsInCart,
   } = useContext(DataItemsInCart);
@@ -28,7 +27,7 @@ const Product = ({ product }) => {
 
   const isInCart = () => {
     const existProduct = productsInCart?.items?.find(
-      (productincart) => productincart._id == product._id
+      (productincart) => productincart._id === product._id
     );
     if (existProduct) return true;
     else return false;
@@ -54,7 +53,7 @@ const Product = ({ product }) => {
         </div>
       </div>
       <p className="my-[15px]">$ {product.precio}</p>
-      {token?<div>
+      
       {usuario === "ADMIN_ROLE" ? (
         <button
           className="mb-[10px] px-[40px] mt-[20px] h-[40px] bg-yellow-200 rounded-[8px] pointer-events-auto hover:bg-yellow-300"
@@ -69,7 +68,7 @@ const Product = ({ product }) => {
       ) : (
         ""
       )}
-      {usuario==="USER_ROLE"?<>
+      
       {!isInCart()? (
         <button
           className="mb-[10px] px-[40px] mt-[20px] h-[40px] bg-yellow-200 rounded-[8px] pointer-events-auto hover:bg-yellow-300"
@@ -86,8 +85,8 @@ const Product = ({ product }) => {
       >
         Ver el carrito
       </button>
-      )} </>:""}
-      </div>: ""}
+      )} 
+     
     </li>
   );
 };

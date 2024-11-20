@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react'
+import { useContext } from 'react'
 import person from '../../../img/person.svg'
 import { Link } from 'react-router-dom'
 import {DataProfileProvider } from '../../Context/UseContextProvider'
 
 const ProfileUser = () => {
 
-  const { putinput, setPutInput, axiosData, setAxiosData, usuarioImg} = useContext(DataProfileProvider)
+  const {usuarioImg} = useContext(DataProfileProvider)
   let token = localStorage.getItem("token")
   
   
@@ -22,7 +22,7 @@ const ProfileUser = () => {
   return (
     <div className=''>
          <Link to="/profileuser">{
-          !token? "" : <img alt='' className="h-[40px] border-white rounded-[7px] mb-[20px] lg:mb-[0px]" src={usuarioImg? usuarioImg: person}/>
+          token?  <img alt='' className="h-[40px] border-white rounded-[7px] mb-[20px] lg:mb-[0px]" src={usuarioImg? usuarioImg: person}/> : ""
          }
          </Link>
     </div>

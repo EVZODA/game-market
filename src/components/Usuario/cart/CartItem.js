@@ -1,8 +1,8 @@
 import axios from "axios";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useCallback } from "react";
 import { DataItemsInCart } from "../../Context/UserContextCart";
 
-const CartItem = ({ productincart, precioTotal }) => {
+const CartItem = ({ productincart }) => {
   const [item, setItem] = useState({});
 
   const {
@@ -10,7 +10,7 @@ const CartItem = ({ productincart, precioTotal }) => {
     deleteProductsIncart
   } = useContext(DataItemsInCart);
 
-  const dataProduct = async () => {
+  const dataProduct = useCallback(async () => {
     const requestGet = await axios.get(
       process.env.REACT_APP_LOCAL_HOST +
         process.env.REACT_APP_PRODUCTS_APP +
@@ -25,11 +25,13 @@ const CartItem = ({ productincart, precioTotal }) => {
       descripcion: data.descripcion,
     });
     return data;
-  };
-
+  }, [productincart._id]);
+  
   useEffect(() => {
     dataProduct();
-  }, []);
+  }, [dataProduct]);
+
+
 
   return (
       <li className="space-y-[10px] border mx-[20px] rounded-[7px] mt-[30px] bg-white text-black p-[20px]">

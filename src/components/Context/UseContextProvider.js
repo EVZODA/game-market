@@ -18,7 +18,7 @@ const DataProfile = (props) => {
         if (usuarioid) {
             getUser()
         }
-    }, )
+    }, [])
     
     const getUser = async () => {
         const response = await apiInstance.get(
@@ -31,6 +31,7 @@ const DataProfile = (props) => {
           setUsuarioImg(response.data.usuario.img)
     }
 
+    console.log(usuarioImg)
 
 
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { useContext } from 'react'
 import { BrowserRouter as Router, Route, Routes, Navigate} from 'react-router-dom'
 import Cart from '../cart/Cart'
 import Login from '../UsuarioConfig/Login'
@@ -15,17 +14,14 @@ import IForgetPassword from '../UsuarioConfig/IForgetPassword'
 import ResetPasswordParams from '../UsuarioConfig/ResetPasswordParams'
 import UserContextCart from '../../Context/UserContextCart'
 import PurchaseCartSuccess from '../cart/PurchaseCartSuccess'
-import { DataProductsProvider } from "../../Context/UseContextEdition";
 import DataProfile from '../../Context/UseContextProvider'
 import HistorialPayments from '../cart/HistorialPayments'
 import SearchInfo from './SearchInfo'
 import Footer from '../../Footer/Footer'
-import { DataItemsInCart } from '../../Context/UserContextCart'
-import { useEffect } from 'react'
+
 
 
 const MainRoutes = () => {
-  const {setOneProducts, OneProducts} = useContext(DataProductsProvider);
   const token = localStorage.getItem("token")
   const adminrole = localStorage.getItem("usuario")
 

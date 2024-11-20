@@ -1,8 +1,7 @@
 
 import shoppingCart from '../../../img/shoppingCart.svg'
 import { Link } from 'react-router-dom'
-import { useContext, useEffect } from 'react'
-import { DataItemsInCart } from '../../Context/UserContextCart'
+
 
 const ProfileUser = () => {
 

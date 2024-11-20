@@ -10,6 +10,8 @@ const ProductSection = () => {
     getProducts();
   }, []);
 
+  console.log(products)
+
   const getProducts = async () => {
     const requestGet = await apiInstance.get(
       process.env.REACT_APP_LOCAL_HOST + process.env.REACT_APP_PRODUCTS_APP
