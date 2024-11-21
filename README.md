@@ -1,7 +1,5 @@
 
 # Game-Store
-Claro, aquí tienes el texto corregido con los acentos y algunos ajustes para mejorar la redacción:
-
 Game Store es un ecommerce de juegos donde los usuarios pueden crear una cuenta e iniciar sesión, modificar su perfil, restablecer su contraseña, añadir productos al carrito y realizar una compra, ver su historial de compras y el administrador puede hacer lo mismo, pero además administrar todos los productos y las categorías dentro del ecommerce.
 
 Este proyecto fue realizado para mejorar mis habilidades en React y aprender cosas que se utilizan en el ámbito laboral.
