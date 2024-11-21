@@ -40,5 +40,5 @@ Este proyecto fue realizado para mejorar mis habilidades en React y aprender cos
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](./public/img/readme/ecommerce.png)
 
