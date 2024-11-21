@@ -22,7 +22,7 @@ const ProfileUser = () => {
   return (
     <div className='my-[20px] lg:my-[0px]'>
          <Link to="/cart">{
-          !token || userRole==="ADMIN_ROLE"?"" : <img alt='' className="h-[40px]" src={shoppingCart}/>
+          !token || !userRole ? "" : <img alt='' className="h-[40px]" src={shoppingCart}/>
          }
          </Link>
     </div>
