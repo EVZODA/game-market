@@ -20,8 +20,8 @@ const CategoriesSection = () => {
   };
 
   return (
-    <div className="Productsection container">
-      <ul className="flex justify-center space-x-6">
+    <div className="Productsection container flex flex-col  items-center justify-start  bg-slate-50 min-h-[100vh]">
+      <ul className="">
         {categories.map((categorie, index) => (
           <Categorie key={index} categorie={categorie}></Categorie>
         ))}
