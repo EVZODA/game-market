@@ -15,7 +15,7 @@ apiInstance.interceptors.response.use(
           title: "justify-center",
           htmlContainer: "h-[200px]",
         },
-        timer: 1500,
+        timer: 2000,
         position: "bottom-right",
         toast: true,
       });
@@ -26,7 +26,7 @@ apiInstance.interceptors.response.use(
     Swal.fire({
       title: err.response.data.msg,
       icon: "error",
-      timer: 2000,
+      timer: 3000,
     });
 
     if (!err.response) {
@@ -43,7 +43,7 @@ apiInstance.interceptors.response.use(
         Swal.fire({
           title: err.response.data.msg,
           icon: "error",
-          timer: 2000,
+          timer: 3000,
         });
         localStorage.clear();
         window.location = "/login";
