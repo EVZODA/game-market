@@ -2,7 +2,6 @@ import { useEffect, useContext } from "react";
 import CartItem from "./CartItem";
 import { DataItemsInCart } from "../../Context/UserContextCart";
 import CartPayment from "./CartPayment";
-import { Navigate } from "react-router-dom";
 
 const Cart = () => {
   

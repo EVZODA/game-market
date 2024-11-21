@@ -34,10 +34,10 @@ const Navbar = () => {
           <Link to="/productsection">Inicio</Link>
         </div>
         <div className="mx-[20px]">
-          {!token?<Link to="/register">Register</Link>: ""}
+          {!token?<Link to="/register">Registrarse</Link>: ""}
         </div>
         <div className="mx-[20px]">
-        {!token?<Link to="/login">login</Link>: ""}
+        {!token?<Link to="/login">Iniciar sesion</Link>: ""}
         </div>
         <div>
         {token&&adminRole!=="ADMIN_ROLE"?<Link to="/historialPayments">Historial de compras</Link>: ""}
@@ -46,13 +46,13 @@ const Navbar = () => {
           <Link to="/productsection">Productos</Link>
         </div>
         <div className="mx-[20px]">
-          {adminRole==="ADMIN_ROLE"?<Link to="/adminproducts">Admin Products</Link>: ""}
+          {adminRole==="ADMIN_ROLE"?<Link to="/adminproducts">Agregar producto</Link>: ""}
         </div>
         <div className="mx-[20px]">
-        {adminRole==="ADMIN_ROLE"?<Link to="/categoriesection">Categories Section</Link>: ""}
+        {adminRole==="ADMIN_ROLE"?<Link to="/categoriesection">Configuracion de las categorias</Link>: ""}
         </div>
         <div className="mx-[20px]">
-        {adminRole==="ADMIN_ROLE"?<Link to="/admincategories">Admin Categories</Link>: ""}
+        {adminRole==="ADMIN_ROLE"?<Link to="/admincategories">Agregar categoria</Link>: ""}
         </div>
       </div>
     </div>
