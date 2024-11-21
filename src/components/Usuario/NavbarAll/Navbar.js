@@ -40,7 +40,7 @@ const Navbar = () => {
         {!token?<Link to="/login">Iniciar sesion</Link>: ""}
         </div>
         <div>
-        {token&&adminRole!=="ADMIN_ROLE"?<Link to="/historialPayments">Historial de compras</Link>: ""}
+        {token?<Link to="/historialPayments">Historial de compras</Link>: ""}
         </div>
         <div className="mx-[20px]">
           <Link to="/productsection">Productos</Link>
