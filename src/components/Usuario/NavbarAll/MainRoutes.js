@@ -38,7 +38,7 @@ const MainRoutes = () => {
             <Route path='/profileuser' element={!token? "" : <PutUser/>}/>
             <Route path='/register' element={!token? <Register/> : <Navigate to= "/"/>}/>
             <Route path='/login'  element={!token? <Login/> : <Navigate to= "/"/>}/>
-            <Route path='/cart'  element={token &&  adminrole!=="ADMIN_ROLE"? <Cart/> : <Navigate to= "/"/>}/>
+            <Route path='/cart'  element={token && adminrole!=="" ? <Cart/> : <Navigate to= "/"/>}/>
             <Route path='/historialPayments' element={token? <HistorialPayments/> : <Navigate to= "/"/>}/>
             <Route path='/searchInfo' element={<SearchInfo/>}/>
             <Route path='/productsection' element={adminrole==="ADMIN_ROLE"?<ProductSection/> : <Navigate to= "/"/>}/>
