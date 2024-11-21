@@ -11,7 +11,7 @@ const Categorie = ({ categorie }) => {
     <li className="my-[40px]">
       {categorie.nombre}
       <button
-        className="ml-[10px] btn btn-primary mt-[15px] px-[5px] h-[40px] bg-yellow-200 rounded-[8px] pointer-events-auto hover:bg-yellow-300"
+        className="ml-[10px] mr-[10px] btn btn-primary mt-[15px] px-[5px] h-[40px] bg-yellow-200 rounded-[8px] pointer-events-auto hover:bg-yellow-300"
         onClick={() => {
           setOneCategories(categorie);
           navigate("/admincategories");
