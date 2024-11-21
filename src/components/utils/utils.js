@@ -11,46 +11,46 @@ apiInstance.interceptors.response.use(
       Swal.fire({
         title: response.data.msg,
         icon: "success",
-        customClass:{
+        customClass: {
           title: "justify-center",
-          htmlContainer: "h-[200px]"
+          htmlContainer: "h-[200px]",
         },
-        timer:1500,
+        timer: 1500,
         position: "bottom-right",
         toast: true,
       });
     }
-    return response
+    return response;
   },
-  (err) => { 
-    if(!err.response) {
+  (err) => {
+    Swal.fire({
+      title: err.response.data.msg,
+      icon: "error",
+      timer: 2000,
+    });
+
+    if (!err.response) {
       return Promise.reject({
         status: 999,
         timestamp: new Date(),
         message: "Se ha producido un error inesperado",
-        error: err
+        error: err,
       });
     }
-    
-   
-    
-    if(err.response.status === 401) {
+
+    if (err.response.status === 401) {
       setTimeout(() => {
         Swal.fire({
           title: err.response.data.msg,
           icon: "error",
-          timer:1500,
+          timer: 2000,
         });
-        localStorage.clear()
-        window.location = "/login"
-       
+        localStorage.clear();
+        window.location = "/login";
       }, 3000);
-        
     }
     return Promise.reject(err.response.data);
   }
 );
-
-
 
 export default apiInstance;
