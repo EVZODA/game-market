@@ -20,8 +20,8 @@ const AdminProducts = () => {
   
 
   return (
-    <div className="flex flex-col  items-center justify-start  bg-slate-50 min-h-[100vh]">
-      <div className="controllercontainer space-x-7 mt-[50px]">
+    <div className="flex flex-col items-center justify-start bg-slate-50 min-h-[100vh]">
+      <div className="mt-[50px] flex flex-col sm:flex-row">
        <button className="btn btn-primary mt-[15px] px-[40px] h-[40px] bg-yellow-200 rounded-[8px] pointer-events-auto hover:bg-yellow-300" onClick={() => setAction("postProduct")}>
           Agregar producto 
         </button>
@@ -32,7 +32,7 @@ const AdminProducts = () => {
           Eliminar producto
         </button>}
       </div>
-      <div>
+      <div className="">
         {action === "postProduct" ? <AdminProductsPost /> : ""}
         {action === "putProduct"? <AdminProductsPut /> : ""}
         {action === "deleteProduct"? <AdminProductsDelete /> : ""}

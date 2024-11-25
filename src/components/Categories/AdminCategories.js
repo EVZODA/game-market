@@ -18,8 +18,8 @@ const AdminCategories = () => {
     }, [])
   
     return (
-      <div className="flex flex-col  items-center justify-start  bg-slate-50 min-h-[100vh]">
-        <div className="controllercontainer space-x-7 mt-[50px]">
+      <div className="flex flex-col  items-center justify-start bg-slate-50 min-h-[100vh]">
+        <div className="mt-[50px] flex flex-col">
            <button className="btn btn-primary mt-[15px] px-[40px] h-[40px] bg-yellow-200 rounded-[8px] pointer-events-auto hover:bg-yellow-300" onClick={() => setAction("postCategorie")}>
             Agregar categoria
           </button>
@@ -30,7 +30,7 @@ const AdminCategories = () => {
             Eliminar Categoria
           </button>}
         </div>
-        <div>
+        <div className=''>
           {action === "postCategorie" ? <AdminCategoriesPost /> : ""}
           {action === "putCategorie" ? <AdminCategoriesPut /> : ""}
           {action === "deleteCategorie" ? <AdminCategoriesDelete /> : ""}

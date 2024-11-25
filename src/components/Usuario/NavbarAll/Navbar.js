@@ -26,7 +26,7 @@ const Navbar = () => {
       <Burguer setopen={setopen} open={open}></Burguer>
     
       <div 
-        className={` z-50 absolute flex flex-col items-center rounded-[7px] bg-white top-[700px] lg:top-[90px] px-[100px] py-[20px] transition-all duration-[1000ms] ease-in-out ${
+        className={` z-50 absolute flex flex-col items-start rounded-[7px] bg-white top-[700px] lg:top-[90px] px-[80px] sm:px-[100px] py-[20px] transition-all duration-[1000ms] ease-in-out ${
           open === true ? "lg:-right-[500px] -top-[700px]" : `${token? "lg:right-[17px] top-[460px]": "lg:right-[17px] top-[358px]"}`
         } `}
       >
@@ -39,7 +39,7 @@ const Navbar = () => {
         <div className="mx-[20px]">
         {!token?<Link to="/login">Iniciar sesion</Link>: ""}
         </div>
-        <div>
+        <div className="mx-[20px]">
         {token?<Link to="/historialPayments">Historial de compras</Link>: ""}
         </div>
         <div className="mx-[20px]">
